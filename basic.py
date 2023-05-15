@@ -9,7 +9,9 @@ import backtrader as bt
 
 # Import the strategy we are going to test
 # from test_strategy import TestStrategy
-from fiftyfive_eightynine import SmaCrossStrategy
+# from fiftyfive_eightynine import SmaCrossStrategy
+from test1 import SmaCrossStrategy
+# from cross import SmaCross
 
 
 if __name__ == '__main__':
@@ -19,6 +21,7 @@ if __name__ == '__main__':
     # Add a strategy
     strats = cerebro.addstrategy(
         SmaCrossStrategy,
+        # SmaCross,
         # TestStrategy,
         # maperiod=20,
     )
@@ -26,13 +29,13 @@ if __name__ == '__main__':
     # Datas are in a subfolder of the samples. Need to find where the script is
     # because it could have been called from anywhere
     modpath = os.path.dirname(os.path.abspath(sys.argv[0]))
-    datapath = os.path.join(modpath, 'datas/btc-usd.csv')
+    datapath = os.path.join(modpath, 'datas/ford.csv')
 
     # Create a Data Feed
     data = bt.feeds.YahooFinanceCSVData(
         dataname=datapath,
         # Do not pass values before this date
-        fromdate=datetime.datetime(2022, 5, 16),
+        fromdate=datetime.datetime(2018, 5, 15),
         # Do not pass values after this date
         todate=datetime.datetime(2023, 5, 15),
         # Do not pass values after this date
