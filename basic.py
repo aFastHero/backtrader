@@ -7,6 +7,9 @@ import sys  # To find out the script name (in argv[0])
 # Import the backtrader platform
 import backtrader as bt
 
+# Import the yfinance package
+import yfinance as yf
+
 # Import the strategy we are going to test
 # from test_strategy import TestStrategy
 # from fiftyfive_eightynine import SmaCrossStrategy
@@ -31,15 +34,21 @@ if __name__ == '__main__':
     modpath = os.path.dirname(os.path.abspath(sys.argv[0]))
     datapath = os.path.join(modpath, 'datas/btc-usd.csv')
 
+    # Fetch data using yfinance
+    data_df = yf.download(tickers="TSLA", period="1mo", interval="60m", prepost=True)
+
+    # Creat a Data Feed with Pandas Dataframe
+    data = bt.feeds.PandasData(dataname=data_df)
+
     # Create a Data Feed
-    data = bt.feeds.YahooFinanceCSVData(
-        dataname=datapath,
-        # Do not pass values before this date
-        fromdate=datetime.datetime(2018, 5, 15),
-        # Do not pass values after this date
-        todate=datetime.datetime(2023, 5, 15),
-        # Do not pass values after this date
-        reverse=False)
+    # data = bt.feeds.YahooFinanceCSVData(
+    #     dataname=datapath,
+    #     # Do not pass values before this date
+    #     fromdate=datetime.datetime(2018, 5, 15),
+    #     # Do not pass values after this date
+    #     todate=datetime.datetime(2023, 5, 15),
+    #     # Do not pass values after this date
+    #     reverse=False)
 
     # Add the Data Feed to Cerebro
     cerebro.adddata(data)
