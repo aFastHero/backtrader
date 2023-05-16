@@ -3,13 +3,13 @@ import backtrader as bt
 
 class MeanReversion(bt.Strategy):
     params = (
-        ('period', 20),
-        ('devfactor', 2.0),
+        ('period', 13),
+        ('devfactor', 2.5),
         ('size', 3),
         ('stop_loss', 0.07),
         ('take_profit1', 0.02),
         ('take_profit2', 0.03),
-        ('take_profit3', 0.09),
+        ('take_profit3', 0.1),
         ('printlog', False),
     )
 
@@ -76,8 +76,8 @@ if __name__ == "__main__":
     cerebro.addstrategy(MeanReversion)
 
     # Import the data using yfinance
-    data_df = yf.download("SPY", start="2018-01-01", end="2023-05-15")
-    # data_df = yf.download("SPY", period="max", interval="1d", prepost=True)
+    # data_df = yf.download("SPY", start="2018-01-01", end="2023-05-15")
+    data_df = yf.download("SPY", period="5y", interval="1d", prepost=True)
 
     # Convert the data into a backtrader feed
     data = bt.feeds.PandasData(dataname=data_df)
@@ -105,4 +105,4 @@ if __name__ == "__main__":
     print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
 
     # Plot the result
-    # cerebro.plot()
+    cerebro.plot()
