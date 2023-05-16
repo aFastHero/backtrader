@@ -35,7 +35,7 @@ if __name__ == '__main__':
     datapath = os.path.join(modpath, 'datas/btc-usd.csv')
 
     # Fetch data using yfinance
-    data_df = yf.download(tickers="TSLA", period="1mo", interval="60m", prepost=True)
+    data_df = yf.download(tickers="SPY", period="5y", interval="1d", prepost=True)
 
     # Creat a Data Feed with Pandas Dataframe
     data = bt.feeds.PandasData(dataname=data_df)
